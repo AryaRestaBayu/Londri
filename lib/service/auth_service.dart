@@ -31,11 +31,15 @@ class AuthService {
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         if (documentSnapshot.get('role') == "user") {
-          Navigator.pushAndRemoveUntil(context,
-              MaterialPageRoute(builder: (_) => UserHome()), (route) => false);
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => const UserHome()),
+              (route) => false);
         } else {
-          Navigator.pushAndRemoveUntil(context,
-              MaterialPageRoute(builder: (_) => AdminHome()), (route) => false);
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => const AdminHome()),
+              (route) => false);
         }
       } else {
         print('Document does not exist on the database');
@@ -61,7 +65,7 @@ class AuthService {
       SharedPreferences pref = await SharedPreferences.getInstance();
       pref.setString("email", email);
       pref.setString('role', role);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       // if (e.code == 'user-not-found') {
       //   Utils.showSnackBar('Akun tidak terdaftar', Colors.red);
       // } else if (e.code == 'wrong-password') {

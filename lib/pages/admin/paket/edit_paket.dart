@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:londri/pages/admin/paket/detail_paket_admin.dart';
 
 import '../../../utils.dart';
 
@@ -94,7 +92,7 @@ class _EditPaketState extends State<EditPaket> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Paket'),
+        title: const Text('Edit Paket'),
       ),
       body: Center(
         child: SizedBox(
@@ -117,10 +115,10 @@ class _EditPaketState extends State<EditPaket> {
                         errorText:
                             namaValidate ? 'Nama tidak boleh kosong' : null,
                         hintText: 'Nama Client',
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.person,
                         ),
-                        border: OutlineInputBorder(
+                        border: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20)))),
                   ),
@@ -134,10 +132,10 @@ class _EditPaketState extends State<EditPaket> {
                         errorText:
                             emailValidate ? 'Email tidak boleh kosong' : null,
                         hintText: 'Email Client',
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.alternate_email,
                         ),
-                        border: OutlineInputBorder(
+                        border: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20)))),
                   ),
@@ -151,8 +149,8 @@ class _EditPaketState extends State<EditPaket> {
                         errorText:
                             beratValidate ? 'Berat tidak boleh kosong' : null,
                         hintText: 'Berat',
-                        prefixIcon: Icon(Icons.scale),
-                        border: OutlineInputBorder(
+                        prefixIcon: const Icon(Icons.scale),
+                        border: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20)))),
                   ),
@@ -165,8 +163,8 @@ class _EditPaketState extends State<EditPaket> {
                         errorText:
                             hargaValidate ? 'Harga tidak boleh kosong' : null,
                         hintText: 'Harga',
-                        prefixIcon: Icon(Icons.attach_money_rounded),
-                        border: OutlineInputBorder(
+                        prefixIcon: const Icon(Icons.attach_money_rounded),
+                        border: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20)))),
                   ),
@@ -181,7 +179,7 @@ class _EditPaketState extends State<EditPaket> {
                       ),
                       isExpanded: true,
                       hint: Row(
-                        children: [
+                        children: const [
                           Icon(
                             Icons.house,
                             color: Colors.black45,
@@ -351,7 +349,7 @@ class _EditPaketState extends State<EditPaket> {
                       // : Image(image: NetworkImage(imageUrl)),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   ElevatedButton(
@@ -387,7 +385,7 @@ class _EditPaketState extends State<EditPaket> {
                         namaClientC.text = '';
                         Navigator.pop(context);
                       },
-                      child: Text('Edit Paket'))
+                      child: const Text('Edit Paket'))
                 ],
               ),
             ),

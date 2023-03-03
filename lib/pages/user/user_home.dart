@@ -47,17 +47,17 @@ class _UserHomeState extends State<UserHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Home'),
+        title: const Text('User Home'),
         actions: [
           IconButton(
               onPressed: () {
                 AuthService().logout();
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
                     (route) => false);
               },
-              icon: Icon(Icons.logout))
+              icon: const Icon(Icons.logout))
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -95,7 +95,7 @@ class _UserHomeState extends State<UserHome> {
                           )));
             },
             child: Container(
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -201,8 +201,8 @@ class _UserHomeState extends State<UserHome> {
                                 child: Align(
                                   alignment: Alignment.bottomRight,
                                   child: Text(
-                                    'Total Harga: ' + thisPaket['list_harga'],
-                                    style: TextStyle(
+                                    'Total Harga: ${thisPaket['list_harga']}',
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),

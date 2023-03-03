@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:londri/auth/login_page.dart';
 import 'package:londri/pages/admin/paket/detail_paket_admin.dart';
 import 'package:londri/pages/admin/paket/tambah_paket.dart';
 import 'package:londri/service/auth_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({super.key});
@@ -41,7 +39,7 @@ class _AdminHomeState extends State<AdminHome> {
     return listPaket;
   }
 
-  Query _referencePaket = FirebaseFirestore.instance.collection('paket');
+  final Query _referencePaket = FirebaseFirestore.instance.collection('paket');
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +75,10 @@ class _AdminHomeState extends State<AdminHome> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddPaket()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddPaket()));
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -102,7 +100,7 @@ class _AdminHomeState extends State<AdminHome> {
                           )));
             },
             child: Container(
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -214,7 +212,7 @@ class _AdminHomeState extends State<AdminHome> {
                                   child: Text(
                                     'Total Harga: Rp.' +
                                         thisPaket['list_harga'],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),

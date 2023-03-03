@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:londri/auth/login_page.dart';
 import 'package:londri/service/auth_service.dart';
@@ -19,7 +17,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Daftar'),
+        title: const Text('Daftar'),
       ),
       body: Center(
         child: Column(
@@ -27,14 +25,14 @@ class _RegisterPageState extends State<RegisterPage> {
             //email
             TextField(
               controller: emailC,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'email',
               ),
             ),
             //password
             TextField(
               controller: passwordC,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'password',
               ),
             ),
@@ -46,10 +44,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
                     (route) => false);
               },
-              child: Text('Daftar'),
+              child: const Text('Daftar'),
             )
           ],
         ),

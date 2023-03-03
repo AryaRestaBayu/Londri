@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:londri/auth/register_page.dart';
 import 'package:londri/service/auth_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFFDEF0F2),
+        backgroundColor: const Color(0xFFDEF0F2),
         body: Center(
           child: SizedBox(
             height: sizeHeight,
@@ -38,7 +35,8 @@ class _LoginPageState extends State<LoginPage> {
                     Container(
                       height: sizeHeight * 0.08,
                       width: sizeWidth * 0.60,
-                      child: Image(image: AssetImage('images/londri.png')),
+                      child:
+                          const Image(image: AssetImage('images/londri.png')),
                     ),
                     SizedBox(
                       height: sizeHeight * 0.07,
@@ -56,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                             height: sizeHeight * 0.03,
                           ),
                           //text login
-                          Text(
+                          const Text(
                             'LOGIN',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 30),
@@ -69,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                             width: sizeWidth * 0.70,
                             height: sizeHeight * 0.07,
                             decoration: BoxDecoration(
-                                color: Color(0xFFDEF0F2),
+                                color: const Color(0xFFDEF0F2),
                                 borderRadius: BorderRadius.circular(30)),
                             child: TextField(
                               textInputAction: TextInputAction.next,
@@ -77,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                               controller: emailC,
                               decoration: InputDecoration(
                                 isDense: true,
-                                prefixIcon: Icon(Icons.person, size: 26),
+                                prefixIcon: const Icon(Icons.person, size: 26),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30)),
                                 hintText: 'Email',
@@ -92,14 +90,14 @@ class _LoginPageState extends State<LoginPage> {
                             width: sizeWidth * 0.70,
                             height: sizeHeight * 0.07,
                             decoration: BoxDecoration(
-                                color: Color(0xFFDEF0F2),
+                                color: const Color(0xFFDEF0F2),
                                 borderRadius: BorderRadius.circular(30)),
                             child: TextField(
                               obscureText: true,
                               controller: passwordC,
                               decoration: InputDecoration(
                                 isDense: true,
-                                prefixIcon: Icon(Icons.lock, size: 26),
+                                prefixIcon: const Icon(Icons.lock, size: 26),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30)),
                                 hintText: 'password',
@@ -111,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                             alignment: Alignment.bottomRight,
                             child: TextButton(
                                 onPressed: () {},
-                                child: Text(
+                                child: const Text(
                                   'Lupa password?',
                                   style: TextStyle(color: Colors.black),
                                 )),
@@ -132,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                               AuthService().login(emailC.text.trim(),
                                   passwordC.text.trim(), context);
                             },
-                            child: Text(
+                            child: const Text(
                               'Login',
                               style: TextStyle(fontSize: 25),
                             ),
@@ -143,19 +141,20 @@ class _LoginPageState extends State<LoginPage> {
                           RichText(
                               text: TextSpan(
                             text: 'Belum memiliki akun?',
-                            style: TextStyle(color: Colors.black),
+                            style: const TextStyle(color: Colors.black),
                             children: [
-                              WidgetSpan(child: SizedBox(width: 5)),
+                              const WidgetSpan(child: SizedBox(width: 5)),
                               TextSpan(
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () =>
                                         Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (_) => RegisterPage()),
+                                                builder: (_) =>
+                                                    const RegisterPage()),
                                             (route) => false),
                                   text: 'Daftar',
-                                  style: TextStyle(color: Colors.blue)),
+                                  style: const TextStyle(color: Colors.blue)),
                             ],
                           ))
                         ],

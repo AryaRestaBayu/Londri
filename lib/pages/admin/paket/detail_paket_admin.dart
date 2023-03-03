@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:londri/pages/admin/paket/edit_paket.dart';
 
@@ -72,7 +71,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         elevation: 1,
-        title: Text(
+        title: const Text(
           'Detail Paket',
           style: TextStyle(color: Colors.black),
         ),
@@ -81,7 +80,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.black,
             )),
@@ -104,7 +103,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
                             itemId: widget.itemId,
                           )));
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.edit,
               color: Colors.blue,
             ),
@@ -115,7 +114,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
               widget._reference.delete();
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.delete,
               color: Colors.red,
             ),
@@ -150,7 +149,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Detail Transaksi',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
@@ -172,7 +171,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
                                           CrossAxisAlignment.start,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
-                                      children: [
+                                      children: const [
                                         Text('Status Transaksi'),
                                         Text('Tanggal Transaksi'),
                                         Text('Outlet'),
@@ -225,7 +224,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Detail Client',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
@@ -246,7 +245,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
                                           CrossAxisAlignment.start,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
-                                      children: [
+                                      children: const [
                                         Text('Nama Client'),
                                         Text('Email'),
                                       ],
@@ -279,7 +278,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Detail Laundry',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
@@ -306,7 +305,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
                                               CrossAxisAlignment.start,
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceAround,
-                                          children: [
+                                          children: const [
                                             Text('Berat'),
                                           ],
                                         ),
@@ -326,7 +325,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
                                   SizedBox(
                                     height: sizeHeight * 0.02,
                                   ),
-                                  Text('Foto produk'),
+                                  const Text('Foto produk'),
                                   SizedBox(
                                     height: sizeHeight * 0.01,
                                   ),
@@ -349,14 +348,14 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
+                                      const Text(
                                         'Total Harga',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20),
                                       ),
                                       Text('Rp.${data['harga']}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold))
                                     ],
                                   )
@@ -373,7 +372,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
             );
           }
 
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         },

@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:londri/auth/login_page.dart';
-import 'package:londri/auth/register_page.dart';
 import 'package:londri/pages/admin/admin_home.dart';
 import 'package:londri/pages/kasir/kasir_home.dart';
 import 'package:londri/pages/user/user_home.dart';
@@ -20,11 +18,11 @@ Future main() async {
     scaffoldMessengerKey: Utils.messengerKey,
     debugShowCheckedModeBanner: false,
     home: email == null
-        ? LoginPage()
+        ? const LoginPage()
         : role == 'kasir'
-            ? KasirHome()
+            ? const KasirHome()
             : role == 'admin'
-                ? AdminHome()
-                : UserHome(),
+                ? const AdminHome()
+                : const UserHome(),
   ));
 }
