@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "954901533151",
+    "project_id": "londri-13078",
+    "storage_bucket": "londri-13078.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:954901533151:android:5be5229c7bc9959f3cb46a",
+        "android_client_info": {
+          "package_name": "com.example.londri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "954901533151-45qdmksm1cd3t2snj7800377qqkb0pjh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt74kEvq-Ey9_p6C2G0074G_JmYhIB1nU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "954901533151-45qdmksm1cd3t2snj7800377qqkb0pjh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
