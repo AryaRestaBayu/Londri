@@ -1,6 +1,13 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:londri/pages/admin/paket/edit_paket.dart';
+import 'package:londri/service/pdf_service.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'dart:io';
 
 class DetailPaketAdmin extends StatefulWidget {
   DetailPaketAdmin(
@@ -85,6 +92,19 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
               color: Colors.black,
             )),
         actions: [
+          //print pdf
+          IconButton(
+            onPressed: () async {
+              final pdfBytes = await PdfGenerator.generatePdf();
+              final dir = await getApplicationDocumentsDirectory();
+              final file = File('${dir.path}/example.pdf');
+              await file.writeAsBytes(pdfBytes);
+            },
+            icon: Icon(
+              Icons.file_download_outlined,
+              color: Colors.black,
+            ),
+          ),
           //edit paket
           IconButton(
             onPressed: () {

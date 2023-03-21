@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:londri/auth/login_page.dart';
-import 'package:londri/pages/admin/admin_home.dart';
+import 'package:londri/pages/admin/admin_navbar.dart';
 import 'package:londri/pages/kasir/kasir_home.dart';
 import 'package:londri/pages/user/user_home.dart';
 import 'package:londri/utils.dart';
@@ -13,8 +13,8 @@ Future main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var email = prefs.getString("email");
   var role = prefs.getString("role");
-
   runApp(MaterialApp(
+    //import londri/utils
     scaffoldMessengerKey: Utils.messengerKey,
     debugShowCheckedModeBanner: false,
     home: email == null
@@ -22,7 +22,7 @@ Future main() async {
         : role == 'kasir'
             ? const KasirHome()
             : role == 'admin'
-                ? const AdminHome()
+                ? const AdminNavbar()
                 : const UserHome(),
   ));
 }

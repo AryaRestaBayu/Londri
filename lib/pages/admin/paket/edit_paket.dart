@@ -53,10 +53,13 @@ class _EditPaketState extends State<EditPaket> {
     'Diambil',
     'Dibatalkan',
   ];
+  String? _initialOutlet;
 
   @override
   void initState() {
     getoutlet();
+    initialOutlet();
+    print(_initialOutlet);
     namaClientC.text = widget.initialNama;
     emailC.text = widget.initialEmail;
     beratC.text = widget.initialBerat;
@@ -65,21 +68,32 @@ class _EditPaketState extends State<EditPaket> {
   }
 
   Future getoutlet() async {
-    var doc = await FirebaseFirestore.instance
+    final Query collectionReference = FirebaseFirestore.instance
         .collection('outlet')
-        .doc('outlet')
-        .get();
-    var _getOutlet = doc.get('outlet');
+        .where('nama_outlet', isNotEqualTo: 'Outlet Tidak Tersedia');
+    final QuerySnapshot querySnapshot = await collectionReference.get();
+    final List<QueryDocumentSnapshot> documentSnapshot = querySnapshot.docs;
+    final List stringList =
+        documentSnapshot.map((e) => e['nama_outlet']).toList();
     setState(() {
-      outlet = _getOutlet;
+      outlet = stringList;
+    });
+  }
+
+  Future initialOutlet() async {
+    var _referenceOutlet = await FirebaseFirestore.instance
+        .collection('outlet')
+        .doc(widget.initialOutlet)
+        .get();
+    var _getInitialOutlet = _referenceOutlet.get('nama_outlet');
+    setState(() {
+      _initialOutlet = _getInitialOutlet;
     });
   }
 
   String imageUrl = '';
   File? _image;
-
   final _formKey = GlobalKey<FormState>();
-
   bool namaValidate = false;
   bool emailValidate = false;
   bool hargaValidate = false;
@@ -180,21 +194,23 @@ class _EditPaketState extends State<EditPaket> {
                       isExpanded: true,
                       hint: Row(
                         children: const [
-                          Icon(
+                          const Icon(
                             Icons.house,
                             color: Colors.black45,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 9,
                           ),
                           Text(
-                            'Pilih Outlet',
+                            'Outlet Tidak Tersedia',
                             style:
                                 TextStyle(fontSize: 15, color: Colors.black54),
                           ),
                         ],
                       ),
-                      value: widget.initialOutlet,
+                      value: _initialOutlet == widget.initialOutlet
+                          ? widget.initialOutlet
+                          : null,
                       items: outlet!
                           .map((item) => DropdownMenuItem<String>(
                                 value: item,
@@ -379,7 +395,7 @@ class _EditPaketState extends State<EditPaket> {
                               "Silahkan tambahkan foto paket", Colors.red);
                           return;
                         }
-                        addPaket();
+                        editPaket();
                         emailC.text = '';
                         hargaC.text = '';
                         namaClientC.text = '';
@@ -395,8 +411,11 @@ class _EditPaketState extends State<EditPaket> {
     );
   }
 
-  Future addPaket() async {
-    FirebaseFirestore.instance.collection('paket').doc(widget.itemId).set({
+  Future editPaket() async {
+    await FirebaseFirestore.instance
+        .collection('paket')
+        .doc(widget.itemId)
+        .set({
       'email': emailC.text.trim(),
       'harga': hargaC.text,
       'berat': beratC.text,

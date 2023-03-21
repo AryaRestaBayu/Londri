@@ -117,6 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             height: sizeHeight * 0.03,
                           ),
+                          //button login
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -138,6 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             height: sizeHeight * 0.02,
                           ),
+                          //import 'package:flutter/gestures.dart';
                           RichText(
                               text: TextSpan(
                             text: 'Belum memiliki akun?',

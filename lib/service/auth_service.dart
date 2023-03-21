@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:londri/pages/admin/admin_navbar.dart';
 import 'package:londri/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../pages/admin/admin_home.dart';
 import '../pages/user/user_home.dart';
 
 class AuthService {
@@ -38,7 +37,7 @@ class AuthService {
         } else {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (_) => const AdminHome()),
+              MaterialPageRoute(builder: (_) => const AdminNavbar()),
               (route) => false);
         }
       } else {
@@ -49,7 +48,6 @@ class AuthService {
 
   Future login(String email, String password, BuildContext context) async {
     late String role;
-
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password)

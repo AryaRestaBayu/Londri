@@ -20,7 +20,6 @@ class _AdminHomeState extends State<AdminHome> {
   }
 
   late Stream<QuerySnapshot> _streamData;
-
   List parseData(QuerySnapshot querySnapshot) {
     List<QueryDocumentSnapshot> listDocs = querySnapshot.docs;
     List listPaket = listDocs
@@ -35,7 +34,6 @@ class _AdminHomeState extends State<AdminHome> {
               'list_poto': e['poto'],
             })
         .toList();
-
     return listPaket;
   }
 
@@ -104,7 +102,6 @@ class _AdminHomeState extends State<AdminHome> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    //paket
                     Padding(
                       padding: EdgeInsets.only(top: sizeHeight * 0.030),
                       child: Material(

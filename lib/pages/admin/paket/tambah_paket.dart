@@ -39,18 +39,19 @@ class _AddPaketState extends State<AddPaket> {
   @override
   void initState() {
     getoutlet();
-
     super.initState();
   }
 
   Future getoutlet() async {
-    var doc = await FirebaseFirestore.instance
+    final Query collectionReference = FirebaseFirestore.instance
         .collection('outlet')
-        .doc('outlet')
-        .get();
-    var _getOutlet = doc.get('outlet');
+        .where('nama_outlet', isNotEqualTo: 'Outlet Tidak Tersedia');
+    final QuerySnapshot querySnapshot = await collectionReference.get();
+    final List<QueryDocumentSnapshot> documentSnapshot = querySnapshot.docs;
+    final List stringList =
+        documentSnapshot.map((e) => e['nama_outlet']).toList();
     setState(() {
-      outlet = _getOutlet;
+      outlet = stringList;
     });
   }
 
@@ -336,7 +337,6 @@ class _AddPaketState extends State<AddPaket> {
                               ],
                             ))
                           : Image.file(_image!, fit: BoxFit.cover),
-                      // : Image(image: NetworkImage(imageUrl)),
                     ),
                   ),
                   const SizedBox(
