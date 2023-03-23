@@ -1,32 +1,52 @@
-// import 'dart:io';
-// import 'package:flutter/material.dart';
-// import 'package:pdf/pdf.dart';
-// import 'package:pdf/widgets.dart' as pw;
-// import 'package:printing/printing.dart';
-// import 'package:flutter/services.dart' show rootBundle;
+import 'dart:typed_data';
 
-// Future pdfInvoiceDownload(
-//   BuildContext context,
-//   String? title,
-//   String? body,
-// ) async {
-//   final pdf = pw.Document();
-//   // add asset image
-//   final bytes =
-//       (await rootBundle.load('assets/images/demo.png')).buffer.asUint8List();
-//   final image = pw.MemoryImage(bytes);
-//   pdf.addPage(pw.Page(
-//       pageFormat: PdfPageFormat.a4,
-//       build: (pw.Context context) {
-//         return pw.Column(children: [
-//           pw.GridView(
-//             crossAxisCount: 2,
-//             children: [
-//               pw.Image(image),
-//             ],
-//           ),
-//         ]);
-//       }));
-//   final pdfSaved = await pdf.save();
-//   await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => pdfSaved);
-// }
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+
+class PdfPreviewPage extends StatelessWidget {
+
+  PdfPreviewPage( {Key? key}) : super(key: key);
+ 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('PDF Preview'),
+      ),
+      body: PdfPreview(
+        build: (context) => makePdf(),
+      ),
+    );
+  }
+ 
+  Future<Uint8List> makePdf() async {
+    final pdf = pw.Document();
+    final ByteData bytes = await rootBundle.load('images/logo.png');
+    final Uint8List byteList = bytes.buffer.asUint8List();
+    pdf.addPage(
+        pw.Page(
+            margin: const pw.EdgeInsets.all(10),
+            pageFormat: PdfPageFormat.a4,
+            build: (context) {
+              return pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                      children: [
+                        pw.Header(text: "About Cat", level: 1),
+                        pw.Image(pw.MemoryImage(byteList), fit: pw.BoxFit.fitHeight, height: 100, width: 100)
+                      ]
+                    ),
+                    pw.Divider(borderStyle: pw.BorderStyle.dashed),
+                    pw.Paragraph(text: "text"),
+                  ]
+              );
+            }
+        ));
+    return pdf.save();
+  }
+}

@@ -95,10 +95,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
           //print pdf
           IconButton(
             onPressed: () async {
-              final pdfBytes = await PdfGenerator.generatePdf();
-              final dir = await getApplicationDocumentsDirectory();
-              final file = File('${dir.path}/example.pdf');
-              await file.writeAsBytes(pdfBytes);
+              Navigator.push(context, MaterialPageRoute(builder: (_)=>PdfPreviewPage() ));
             },
             icon: Icon(
               Icons.file_download_outlined,
