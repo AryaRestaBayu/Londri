@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:londri/pages/admin/paket/edit_paket.dart';
-import 'package:londri/service/pdf_service.dart';
 
-class DetailPaketAdmin extends StatefulWidget {
-  DetailPaketAdmin(
+class DetailPaketUser extends StatefulWidget {
+  DetailPaketUser(
     this.itemId, {
     super.key,
   }) {
@@ -17,10 +16,10 @@ class DetailPaketAdmin extends StatefulWidget {
   late Stream<DocumentSnapshot> _futureData;
 
   @override
-  State<DetailPaketAdmin> createState() => _DetailPaketAdminState();
+  State<DetailPaketUser> createState() => _DetailPaketUserState();
 }
 
-class _DetailPaketAdminState extends State<DetailPaketAdmin> {
+class _DetailPaketUserState extends State<DetailPaketUser> {
   late String initialNama;
   late String initialEmail;
   late String initialBerat;
@@ -87,16 +86,7 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
             )),
         actions: [
           //print pdf
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => PdfPreviewPage()));
-            },
-            icon: const Icon(
-              Icons.file_download_outlined,
-              color: Colors.black,
-            ),
-          ),
+
           //edit paket
           IconButton(
             onPressed: () {

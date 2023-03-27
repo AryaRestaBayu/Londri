@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:londri/pages/admin/paket/detail_paket_admin.dart';
 import 'package:londri/service/auth_service.dart';
 
 import '../../auth/login_page.dart';
+import 'detail_paket_user.dart';
 
 class UserHome extends StatefulWidget {
   const UserHome({super.key});
@@ -90,7 +90,7 @@ class _UserHomeState extends State<UserHome> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => DetailPaketAdmin(
+                      builder: (context) => DetailPaketUser(
                             thisPaket['id'],
                           )));
             },
@@ -175,7 +175,7 @@ class _UserHomeState extends State<UserHome> {
                                     width: sizeWidth * 0.08,
                                   ),
                                   Expanded(
-                                    child: Container(
+                                    child: SizedBox(
                                       height: sizeHeight * 0.15,
                                       width: sizeWidth * 0.30,
                                       child: Column(

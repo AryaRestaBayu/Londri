@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //teks londri
-                    Container(
+                    SizedBox(
                       height: sizeHeight * 0.08,
                       width: sizeWidth * 0.60,
                       child:

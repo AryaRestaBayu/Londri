@@ -5,14 +5,14 @@ import 'package:londri/pages/admin/paket/detail_paket_admin.dart';
 import 'package:londri/pages/admin/paket/tambah_paket.dart';
 import 'package:londri/service/auth_service.dart';
 
-class AdminHome extends StatefulWidget {
-  const AdminHome({super.key});
+class OwnerHome extends StatefulWidget {
+  const OwnerHome({super.key});
 
   @override
-  State<AdminHome> createState() => _AdminHomeState();
+  State<OwnerHome> createState() => _OwnerHomeState();
 }
 
-class _AdminHomeState extends State<AdminHome> {
+class _OwnerHomeState extends State<OwnerHome> {
   @override
   void initState() {
     _streamData = _referencePaket.snapshots();
@@ -43,8 +43,7 @@ class _AdminHomeState extends State<AdminHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF67bde1),
-        title: const Text('Admin Home'),
+        title: const Text('Owner Home'),
         actions: [
           IconButton(
               onPressed: () {
@@ -208,7 +207,8 @@ class _AdminHomeState extends State<AdminHome> {
                                 child: Align(
                                   alignment: Alignment.bottomRight,
                                   child: Text(
-                                    'Total harga Rp.${thisPaket['list_harga']}',
+                                    'Total Harga: Rp.' +
+                                        thisPaket['list_harga'],
                                     style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),

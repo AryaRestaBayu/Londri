@@ -39,7 +39,7 @@ class _ListOutletState extends State<ListOutlet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('list outlet')),
+      appBar: AppBar(title: const Text('list outlet')),
       body: StreamBuilder<QuerySnapshot>(
         stream: _streamData,
         builder: ((context, snapshot) {
@@ -62,36 +62,34 @@ class _ListOutletState extends State<ListOutlet> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text('Tambah Outlet'),
-                  content: Container(
-                    child: TextFormField(
-                      controller: tambahC,
-                      textInputAction: TextInputAction.next,
-                      maxLength: 25,
-                      decoration: const InputDecoration(
-                          hintText: 'Nama Outlet',
-                          prefixIcon: Icon(
-                            Icons.home_outlined,
-                          ),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)))),
-                    ),
+                  title: const Text('Tambah Outlet'),
+                  content: TextFormField(
+                    controller: tambahC,
+                    textInputAction: TextInputAction.next,
+                    maxLength: 25,
+                    decoration: const InputDecoration(
+                        hintText: 'Nama Outlet',
+                        prefixIcon: Icon(
+                          Icons.home_outlined,
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20)))),
                   ),
                   actions: [
                     TextButton(
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child:
-                            Text('Batal', style: TextStyle(color: Colors.red))),
+                        child: const Text('Batal',
+                            style: TextStyle(color: Colors.red))),
                     TextButton(
                         onPressed: () {
                           tambah(tambahC.text);
                           tambahC.text = '';
                           Navigator.pop(context);
                         },
-                        child: Text('Tambah',
+                        child: const Text('Tambah',
                             style: TextStyle(color: Colors.blue)))
                   ],
                 );
@@ -110,10 +108,10 @@ class _ListOutletState extends State<ListOutlet> {
         itemBuilder: (context, index) {
           Map thisOutlet = outletItem[index];
           return Container(
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: Container(
               height: sizeHeight * 0.08,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 border: Border(bottom: BorderSide(width: 1)),
                 color: Colors.white,
               ),
@@ -133,7 +131,7 @@ class _ListOutletState extends State<ListOutlet> {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: sizeHeight,
                     width: sizeWidth * 0.40,
                     child: Row(
@@ -147,30 +145,27 @@ class _ListOutletState extends State<ListOutlet> {
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                         title: Text(thisOutlet['list_outlet']),
-                                        content: Container(
-                                          child: TextFormField(
-                                            controller: editC,
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            maxLength: 25,
-                                            decoration: const InputDecoration(
-                                                hintText: 'Nama Baru Outlet',
-                                                prefixIcon: Icon(
-                                                  Icons.home_outlined,
-                                                ),
-                                                border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                20)))),
-                                          ),
+                                        content: TextFormField(
+                                          controller: editC,
+                                          textInputAction: TextInputAction.next,
+                                          maxLength: 25,
+                                          decoration: const InputDecoration(
+                                              hintText: 'Nama Baru Outlet',
+                                              prefixIcon: Icon(
+                                                Icons.home_outlined,
+                                              ),
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              20)))),
                                         ),
                                         actions: [
                                           TextButton(
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('Batal',
+                                              child: const Text('Batal',
                                                   style: TextStyle(
                                                       color: Colors.red))),
                                           TextButton(
@@ -180,14 +175,14 @@ class _ListOutletState extends State<ListOutlet> {
                                                 editC.text = '';
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('Ganti',
+                                              child: const Text('Ganti',
                                                   style: TextStyle(
                                                       color: Colors.blue)))
                                         ],
                                       );
                                     });
                               },
-                              icon: Icon(Icons.edit)),
+                              icon: const Icon(Icons.edit)),
                           IconButton(
                               onPressed: () {
                                 showDialog(
@@ -201,7 +196,7 @@ class _ListOutletState extends State<ListOutlet> {
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('Batal',
+                                              child: const Text('Batal',
                                                   style: TextStyle(
                                                       color: Colors.red))),
                                           TextButton(
@@ -210,14 +205,14 @@ class _ListOutletState extends State<ListOutlet> {
                                                     thisOutlet['list_outlet']);
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('Hapus',
+                                              child: const Text('Hapus',
                                                   style: TextStyle(
                                                       color: Colors.blue)))
                                         ],
                                       );
                                     });
                               },
-                              icon: Icon(Icons.delete))
+                              icon: const Icon(Icons.delete))
                         ]),
                   ),
                 ],

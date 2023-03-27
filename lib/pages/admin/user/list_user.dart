@@ -36,7 +36,7 @@ class _ListUserState extends State<ListUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('user')),
+      appBar: AppBar(title: const Text('User Home')),
       body: StreamBuilder<QuerySnapshot>(
         stream: _streamData,
         builder: ((context, snapshot) {
@@ -71,10 +71,10 @@ class _ListUserState extends State<ListUser> {
           Map thisUser = userItem[index];
           String valueRole = thisUser['list_role'];
           return Container(
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: Container(
               height: sizeHeight * 0.08,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 border: Border(bottom: BorderSide(width: 1)),
                 color: Colors.white,
               ),
@@ -106,7 +106,7 @@ class _ListUserState extends State<ListUser> {
                       ],
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: sizeHeight,
                     width: sizeWidth * 0.40,
                     child: Row(
@@ -119,7 +119,7 @@ class _ListUserState extends State<ListUser> {
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                         title: Text(thisUser['list_email']),
-                                        content: Container(
+                                        content: SizedBox(
                                           height: sizeHeight * 0.09,
                                           child: Column(
                                             crossAxisAlignment:
@@ -187,36 +187,40 @@ class _ListUserState extends State<ListUser> {
                                                     valueRole);
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('yes'))
+                                              child: const Text('yes'))
                                         ],
                                       );
                                     });
                               },
-                              icon: Icon(Icons.edit)),
+                              icon: const Icon(Icons.edit)),
                           IconButton(
                               onPressed: () {
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: Text('Hapus akun'),
+                                        title: const Text('Hapus akun'),
+                                        content: const Text(
+                                          'Akun akan dihapus permanen dan tidak dapat dipulihkan',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
                                         actions: [
                                           TextButton(
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('Batal')),
+                                              child: const Text('Batal')),
                                           TextButton(
                                               onPressed: () {
                                                 delete(thisUser['list_email']);
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('Hapus'))
+                                              child: const Text('Hapus'))
                                         ],
                                       );
                                     });
                               },
-                              icon: Icon(Icons.delete))
+                              icon: const Icon(Icons.delete))
                         ]),
                   ),
                 ],

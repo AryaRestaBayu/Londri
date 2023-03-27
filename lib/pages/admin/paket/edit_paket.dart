@@ -194,11 +194,11 @@ class _EditPaketState extends State<EditPaket> {
                       isExpanded: true,
                       hint: Row(
                         children: const [
-                          const Icon(
+                          Icon(
                             Icons.house,
                             color: Colors.black45,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 9,
                           ),
                           Text(
