@@ -43,7 +43,8 @@ class _KasirHomeState extends State<KasirHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Admin Home'),
+        title: const Text('Kasir Home'),
+        backgroundColor: Color(0xFF67bde1),
         actions: [
           IconButton(
               onPressed: () {
@@ -72,6 +73,7 @@ class _KasirHomeState extends State<KasirHome> {
         }),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFF67bde1),
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const AddPaket()));
@@ -142,21 +144,31 @@ class _KasirHomeState extends State<KasirHome> {
                                         top: sizeHeight * 0.010,
                                         left: sizeWidth * 0.03,
                                         right: sizeWidth * 0.02),
-                                    child: Text(
-                                      thisPaket['list_status'],
-                                      style: TextStyle(
-                                        color: thisPaket['list_status'] ==
-                                                'Proses'
-                                            ? Colors.yellow
-                                            : thisPaket['list_status'] ==
-                                                    'Selesai'
-                                                ? Colors.green
-                                                : thisPaket['list_status'] ==
-                                                        'Diambil'
-                                                    ? Colors.blue
-                                                    : Colors.red,
-                                        fontSize: sizeWidth * 0.043,
-                                        fontWeight: FontWeight.bold,
+                                    child: Container(
+                                      width: sizeWidth * 0.18,
+                                      height: sizeHeight * 0.025,
+                                      decoration: BoxDecoration(
+                                          color: thisPaket['list_status'] ==
+                                                  'Proses'
+                                              ? Colors.yellow
+                                              : thisPaket['list_status'] ==
+                                                      'Selesai'
+                                                  ? Colors.green
+                                                  : thisPaket['list_status'] ==
+                                                          'Diambil'
+                                                      ? Colors.blue
+                                                      : Colors.red,
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
+                                      child: Center(
+                                        child: Text(
+                                          thisPaket['list_status'],
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: sizeWidth * 0.035,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -199,19 +211,23 @@ class _KasirHomeState extends State<KasirHome> {
                                   )
                                 ],
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: sizeHeight * 0.007,
-                                    right: sizeWidth * 0.03,
-                                    bottom: sizeHeight * 0.008),
-                                child: Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: Text(
-                                    'Total Harga: Rp.' +
-                                        thisPaket['list_harga'],
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  width: sizeWidth * 0.48,
+                                  height: sizeHeight * 0.025,
+                                  margin: EdgeInsets.only(bottom: 5),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFdef0f2),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Total harga Rp.${thisPaket['list_harga']}',
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ),
                               ),

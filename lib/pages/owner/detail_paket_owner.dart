@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:londri/pages/admin/paket/edit_paket.dart';
 import 'package:londri/service/pdf_service.dart';
 
-class DetailPaketUser extends StatefulWidget {
-  DetailPaketUser(
+class DetailPaketOwner extends StatefulWidget {
+  DetailPaketOwner(
     this.itemId, {
     super.key,
   }) {
@@ -17,10 +17,10 @@ class DetailPaketUser extends StatefulWidget {
   late Stream<DocumentSnapshot> _futureData;
 
   @override
-  State<DetailPaketUser> createState() => _DetailPaketUserState();
+  State<DetailPaketOwner> createState() => _DetailPaketOwnerState();
 }
 
-class _DetailPaketUserState extends State<DetailPaketUser> {
+class _DetailPaketOwnerState extends State<DetailPaketOwner> {
   @override
   Widget build(BuildContext context) {
     double sizeHeight = MediaQuery.of(context).size.height;
@@ -41,6 +41,19 @@ class _DetailPaketUserState extends State<DetailPaketUser> {
             icon: const Icon(
               Icons.arrow_back,
             )),
+        actions: [
+          //print pdf
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => PdfPreviewPage()));
+            },
+            icon: const Icon(
+              Icons.file_download_outlined,
+              color: Colors.black,
+            ),
+          ),
+        ],
       ),
       body: StreamBuilder<DocumentSnapshot>(
         stream: widget._futureData,

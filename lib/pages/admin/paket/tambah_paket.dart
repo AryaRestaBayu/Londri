@@ -76,6 +76,7 @@ class _AddPaketState extends State<AddPaket> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tambah Paket'),
+        backgroundColor: Color(0xFF67bde1),
       ),
       body: Center(
         child: SizedBox(
@@ -340,9 +341,13 @@ class _AddPaketState extends State<AddPaket> {
                     ),
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 20,
                   ),
                   ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF67bde1),
+                          shape: ContinuousRectangleBorder(
+                              borderRadius: BorderRadius.circular(30))),
                       onPressed: () {
                         setState(() {
                           namaClientC.text.isEmpty
@@ -351,12 +356,16 @@ class _AddPaketState extends State<AddPaket> {
                           emailC.text.isEmpty
                               ? emailValidate = true
                               : emailValidate = false;
+                          beratC.text.isEmpty
+                              ? beratValidate = true
+                              : beratValidate = false;
                           hargaC.text.isEmpty
                               ? hargaValidate = true
                               : hargaValidate = false;
                         });
                         if (namaValidate == true) return;
                         if (emailValidate == true) return;
+                        if (beratValidate == true) return;
                         if (hargaValidate == true) return;
 
                         final isValid = _formKey.currentState!.validate();
@@ -375,7 +384,10 @@ class _AddPaketState extends State<AddPaket> {
                         namaClientC.text = '';
                         Navigator.pop(context);
                       },
-                      child: const Text('Tambah Paket'))
+                      child: const Text('Tambah Paket')),
+                  SizedBox(
+                    height: sizeHeight * 0.03,
+                  )
                 ],
               ),
             ),
@@ -397,5 +409,6 @@ class _AddPaketState extends State<AddPaket> {
       'jam': '$jam WIB',
       'poto': imageUrl,
     });
+    Utils.showSnackBar('Paket telah ditambahkan', Colors.blue);
   }
 }

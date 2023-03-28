@@ -74,16 +74,14 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
         elevation: 1,
         title: const Text(
           'Detail Paket',
-          style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF67bde1),
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Colors.black,
             )),
         actions: [
           //print pdf
@@ -117,14 +115,39 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
             },
             icon: const Icon(
               Icons.edit,
-              color: Colors.blue,
+              color: Colors.black,
             ),
           ),
           //delete paket
           IconButton(
             onPressed: () {
-              widget._reference.delete();
-              Navigator.pop(context);
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Hapus Paket'),
+                      content: const Text(
+                        'Paket tidak dapat dipulihkan',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Batal',
+                                style: TextStyle(color: Colors.blue))),
+                        TextButton(
+                            onPressed: () {
+                              widget._reference.delete();
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Hapus',
+                                style: TextStyle(color: Colors.red)))
+                      ],
+                    );
+                  });
             },
             icon: const Icon(
               Icons.delete,
@@ -145,238 +168,260 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
             Map data = documentSnapshot.data() as Map;
 
             return SingleChildScrollView(
-              // '${data['email']}',
-
               child: Center(
                 child: SizedBox(
-                  width: sizeWidth,
-                  height: sizeHeight,
+                  width: sizeWidth * 0.90,
                   child: Column(
                     children: [
                       //detail transaksi
-                      Container(
-                        width: sizeWidth,
-                        height: sizeHeight * 0.19,
-                        color: Colors.white,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Detail Transaksi',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                            SizedBox(
-                              height: sizeHeight * 0.02,
-                            ),
-                            Center(
-                              child: SizedBox(
-                                height: sizeHeight * 0.13,
-                                width: sizeWidth,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    //judul detail transaksi
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: const [
-                                        Text('Status Transaksi'),
-                                        Text('Tanggal Transaksi'),
-                                        Text('Outlet'),
-                                      ],
-                                    ),
-                                    //isi detail transaksi
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(
-                                          '${data['status']}',
-                                          style: TextStyle(
-                                            color: data['status'] == 'Proses'
-                                                ? Colors.yellow
-                                                : data['status'] == 'Selesai'
-                                                    ? Colors.green
-                                                    : data['status'] ==
-                                                            'Diambil'
-                                                        ? Colors.blue
-                                                        : Colors.red,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          '${data['tanggal']} ${data['jam']}',
-                                        ),
-                                        Text(
-                                          '${data['outlet']}',
-                                        )
-                                      ],
-                                    )
-                                  ],
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xFFdef0f2),
+                          child: Container(
+                            width: sizeWidth * 0.90,
+                            height: sizeHeight * 0.19,
+                            margin: EdgeInsets.all(8),
+                            color: Color(0xFFdef0f2),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Detail Transaksi',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: sizeHeight * 0.02,
-                      ),
-                      //detail client
-                      Container(
-                        width: sizeWidth,
-                        height: sizeHeight * 0.15,
-                        color: Colors.white,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Detail Client',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                            SizedBox(
-                              height: sizeHeight * 0.02,
-                            ),
-                            SizedBox(
-                              width: sizeWidth,
-                              height: sizeHeight * 0.09,
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    //judul detail client
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: const [
-                                        Text('Nama Client'),
-                                        Text('Email'),
-                                      ],
-                                    ),
-                                    //isi detail client
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text('${data['nama_client']}'),
-                                        // Text('${data['email']}'),
-                                        Text(data['email']),
-                                      ],
-                                    ),
-                                  ]),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: sizeHeight * 0.02,
-                      ),
-                      //Detail Laundry
-                      Container(
-                        width: sizeWidth,
-                        height: sizeHeight * 0.62,
-                        color: Colors.white,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Detail Laundry',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                            SizedBox(
-                              height: sizeHeight * 0.02,
-                            ),
-                            SizedBox(
-                              width: sizeWidth,
-                              height: sizeHeight * 0.54,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
+                                SizedBox(
+                                  height: sizeHeight * 0.02,
+                                ),
+                                Center(
+                                  child: SizedBox(
+                                    height: sizeHeight * 0.13,
                                     width: sizeWidth,
-                                    height: sizeHeight * 0.03,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        //judul detail laundry
+                                        //judul detail transaksi
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceAround,
                                           children: const [
-                                            Text('Berat'),
+                                            Text('Status Transaksi'),
+                                            Text('Tanggal Transaksi'),
+                                            Text('Outlet'),
                                           ],
                                         ),
-                                        //isi detail laundry
+                                        //isi detail transaksi
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceAround,
                                           children: [
-                                            Text('${data['berat']} kg'),
+                                            Text(
+                                              '${data['status']}',
+                                              style: TextStyle(
+                                                color:
+                                                    data['status'] == 'Proses'
+                                                        ? Colors.yellow
+                                                        : data['status'] ==
+                                                                'Selesai'
+                                                            ? Colors.green
+                                                            : data['status'] ==
+                                                                    'Diambil'
+                                                                ? Colors.blue
+                                                                : Colors.red,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              '${data['tanggal']} ${data['jam']}',
+                                            ),
+                                            Text(
+                                              '${data['outlet']}',
+                                            )
                                           ],
-                                        ),
+                                        )
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: sizeHeight * 0.02,
-                                  ),
-                                  const Text('Foto produk'),
-                                  SizedBox(
-                                    height: sizeHeight * 0.01,
-                                  ),
-                                  Center(
-                                    child: Container(
-                                      width: sizeWidth * 0.80,
-                                      height: sizeHeight * 0.40,
-                                      decoration:
-                                          BoxDecoration(border: Border.all()),
-                                      child: Image(
-                                        image: NetworkImage(data['poto']),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: sizeHeight * 0.02,
-                                  ),
-                                  Row(
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: sizeHeight * 0.02,
+                      ),
+                      //detail client
+                      Material(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color(0xFFdef0f2),
+                        child: Container(
+                          width: sizeWidth,
+                          height: sizeHeight * 0.12,
+                          margin: EdgeInsets.all(8),
+                          color: Color(0xFFdef0f2),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Detail Client',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                              SizedBox(
+                                height: sizeHeight * 0.015,
+                              ),
+                              SizedBox(
+                                width: sizeWidth,
+                                height: sizeHeight * 0.07,
+                                child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text(
-                                        'Total Harga',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
+                                      //judul detail client
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: const [
+                                          Text('Nama Client'),
+                                          Text('Email'),
+                                        ],
                                       ),
-                                      Text('Rp.${data['harga']}',
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold))
-                                    ],
-                                  )
-                                ],
+                                      //isi detail client
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text('${data['nama_client']}'),
+                                          // Text('${data['email']}'),
+                                          Text(data['email']),
+                                        ],
+                                      ),
+                                    ]),
                               ),
-                            )
-                          ],
+                            ],
+                          ),
                         ),
                       ),
+                      SizedBox(
+                        height: sizeHeight * 0.02,
+                      ),
+                      //Detail Laundry
+                      Material(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color(0xFFdef0f2),
+                        child: Container(
+                          width: sizeWidth,
+                          height: sizeHeight * 0.60,
+                          margin: EdgeInsets.all(8),
+                          color: Color(0xFFdef0f2),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Detail Laundry',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                              SizedBox(
+                                height: sizeHeight * 0.02,
+                              ),
+                              SizedBox(
+                                width: sizeWidth,
+                                height: sizeHeight * 0.54,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: sizeWidth,
+                                      height: sizeHeight * 0.03,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          //judul detail laundry
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: const [
+                                              Text('Berat'),
+                                            ],
+                                          ),
+                                          //isi detail laundry
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text('${data['berat']} kg'),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: sizeHeight * 0.02,
+                                    ),
+                                    const Text('Foto paket'),
+                                    SizedBox(
+                                      height: sizeHeight * 0.01,
+                                    ),
+                                    Center(
+                                      child: Container(
+                                        width: sizeWidth * 0.80,
+                                        height: sizeHeight * 0.40,
+                                        decoration:
+                                            BoxDecoration(border: Border.all()),
+                                        child: Image(
+                                          image: NetworkImage(data['poto']),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: sizeHeight * 0.02,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text(
+                                          'Total Harga',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 17),
+                                        ),
+                                        Text('Rp.${data['harga']}',
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 17))
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      )
                     ],
                   ),
                 ),

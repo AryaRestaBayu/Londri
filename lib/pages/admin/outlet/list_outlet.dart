@@ -39,7 +39,10 @@ class _ListOutletState extends State<ListOutlet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('list outlet')),
+      appBar: AppBar(
+        title: const Text('list outlet'),
+        backgroundColor: Color(0xFF67bde1),
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _streamData,
         builder: ((context, snapshot) {
@@ -56,6 +59,7 @@ class _ListOutletState extends State<ListOutlet> {
         }),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFF67bde1),
         onPressed: () {
           showDialog(
               //floating action button list outlet
@@ -108,115 +112,115 @@ class _ListOutletState extends State<ListOutlet> {
         itemBuilder: (context, index) {
           Map thisOutlet = outletItem[index];
           return Container(
-            decoration: const BoxDecoration(),
-            child: Container(
-              height: sizeHeight * 0.08,
-              decoration: const BoxDecoration(
-                border: Border(bottom: BorderSide(width: 1)),
-                color: Colors.white,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: sizeWidth * 0.10),
-                    child: Center(
-                      child: Text(
-                        thisOutlet['list_outlet'],
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: sizeWidth * 0.045,
-                          fontWeight: FontWeight.bold,
-                        ),
+            height: sizeHeight * 0.08,
+            margin: EdgeInsets.only(
+              top: sizeHeight * 0.02,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: Color(0xFFdef0f2),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: sizeWidth * 0.10),
+                  child: Center(
+                    child: Text(
+                      thisOutlet['list_outlet'],
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: sizeWidth * 0.045,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: sizeHeight,
-                    width: sizeWidth * 0.40,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          //edit outlet
-                          IconButton(
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text(thisOutlet['list_outlet']),
-                                        content: TextFormField(
-                                          controller: editC,
-                                          textInputAction: TextInputAction.next,
-                                          maxLength: 25,
-                                          decoration: const InputDecoration(
-                                              hintText: 'Nama Baru Outlet',
-                                              prefixIcon: Icon(
-                                                Icons.home_outlined,
-                                              ),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              20)))),
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text('Batal',
-                                                  style: TextStyle(
-                                                      color: Colors.red))),
-                                          TextButton(
-                                              onPressed: () {
-                                                editOutlet(editC.text,
-                                                    thisOutlet['list_outlet']);
-                                                editC.text = '';
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text('Ganti',
-                                                  style: TextStyle(
-                                                      color: Colors.blue)))
-                                        ],
-                                      );
-                                    });
-                              },
-                              icon: const Icon(Icons.edit)),
-                          IconButton(
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text(
-                                            'Hapus ${thisOutlet['list_outlet']}'),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text('Batal',
-                                                  style: TextStyle(
-                                                      color: Colors.red))),
-                                          TextButton(
-                                              onPressed: () {
-                                                delete(
-                                                    thisOutlet['list_outlet']);
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text('Hapus',
-                                                  style: TextStyle(
-                                                      color: Colors.blue)))
-                                        ],
-                                      );
-                                    });
-                              },
-                              icon: const Icon(Icons.delete))
-                        ]),
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: sizeHeight,
+                  width: sizeWidth * 0.40,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        //edit outlet
+                        IconButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(thisOutlet['list_outlet']),
+                                      content: TextFormField(
+                                        controller: editC,
+                                        textInputAction: TextInputAction.next,
+                                        maxLength: 25,
+                                        decoration: const InputDecoration(
+                                            hintText: 'Nama Baru Outlet',
+                                            prefixIcon: Icon(
+                                              Icons.home_outlined,
+                                            ),
+                                            border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(20)))),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Batal',
+                                                style: TextStyle(
+                                                    color: Colors.red))),
+                                        TextButton(
+                                            onPressed: () {
+                                              editOutlet(editC.text,
+                                                  thisOutlet['list_outlet']);
+                                              editC.text = '';
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Ubah',
+                                                style: TextStyle(
+                                                    color: Colors.blue)))
+                                      ],
+                                    );
+                                  });
+                            },
+                            icon: const Icon(Icons.edit)),
+                        IconButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(
+                                          'Hapus ${thisOutlet['list_outlet']}'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Batal',
+                                                style: TextStyle(
+                                                    color: Colors.blue))),
+                                        TextButton(
+                                            onPressed: () {
+                                              delete(thisOutlet['list_outlet']);
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Hapus',
+                                                style: TextStyle(
+                                                    color: Colors.red)))
+                                      ],
+                                    );
+                                  });
+                            },
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ))
+                      ]),
+                ),
+              ],
             ),
           );
         });

@@ -12,52 +12,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // SharedPreferences prefs = await SharedPreferences.getInstance();
-  // var email = prefs.getString("email");
-  // var role = prefs.getString("role");
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var email = prefs.getString("email");
+  var role = prefs.getString("role");
+  print(email);
+  print(role);
   runApp(MaterialApp(
-      //import londri/utils
-      scaffoldMessengerKey: Utils.messengerKey,
-      debugShowCheckedModeBanner: false,
-      home: const Splash()
-      // email == null
-      //     ? const LoginPage()
-      //     : role == 'kasir'
-      //         ? const KasirHome()
-      //         : role == 'admin'
-      //             ? const AdminNavbar()
-      //             : role == 'owner'
-      //                 ? const OwnerHome()
-      //                 : const UserHome(),
-      ));
-}
-
-class RoleTree extends StatefulWidget {
-  const RoleTree({super.key});
-
-  @override
-  State<RoleTree> createState() => _RoleTreeState();
-}
-
-class _RoleTreeState extends State<RoleTree> {
-  @override
-  void initState() {
-    getPref();
-    super.initState();
-  }
-
-  getPref() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    email = prefs.getString("email");
-    role = prefs.getString("role");
-  }
-
-  String? email;
-  String? role;
-
-  @override
-  Widget build(BuildContext context) {
-    return email == null
+    //import londri/utils
+    scaffoldMessengerKey: Utils.messengerKey,
+    debugShowCheckedModeBanner: false,
+    home: email == null
         ? const LoginPage()
         : role == 'kasir'
             ? const KasirHome()
@@ -65,6 +29,6 @@ class _RoleTreeState extends State<RoleTree> {
                 ? const AdminNavbar()
                 : role == 'owner'
                     ? const OwnerHome()
-                    : const UserHome();
-  }
+                    : const UserHome(),
+  ));
 }

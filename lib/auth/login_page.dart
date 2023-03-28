@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:londri/auth/register_page.dart';
 import 'package:londri/service/auth_service.dart';
 
+import '../utils.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -12,6 +14,8 @@ class LoginPage extends StatefulWidget {
 
 TextEditingController emailC = TextEditingController();
 TextEditingController passwordC = TextEditingController();
+
+bool seePass = true;
 
 class _LoginPageState extends State<LoginPage> {
   @override
@@ -93,14 +97,29 @@ class _LoginPageState extends State<LoginPage> {
                                 color: const Color(0xFFDEF0F2),
                                 borderRadius: BorderRadius.circular(30)),
                             child: TextField(
-                              obscureText: true,
+                              obscureText: seePass,
                               controller: passwordC,
                               decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        seePass = !seePass;
+                                      });
+                                    },
+                                    icon: seePass
+                                        ? const Icon(
+                                            Icons.visibility_off,
+                                            size: 26,
+                                          )
+                                        : const Icon(
+                                            Icons.visibility,
+                                            size: 26,
+                                          )),
                                 isDense: true,
                                 prefixIcon: const Icon(Icons.lock, size: 26),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30)),
-                                hintText: 'password',
+                                hintText: 'Password',
                               ),
                             ),
                           ),
@@ -128,8 +147,27 @@ class _LoginPageState extends State<LoginPage> {
                               elevation: 0,
                             ),
                             onPressed: () async {
-                              AuthService().login(emailC.text.trim(),
-                                  passwordC.text.trim(), context);
+                              if (emailC.text.isEmpty) {
+                                return Utils.showSnackBar(
+                                    'Email tidak boleh kosong', Colors.red);
+                              }
+                              if (emailC.text.contains('@')) {
+                                if (passwordC.text.isEmpty) {
+                                  return Utils.showSnackBar(
+                                      'Password tidak boleh kosong',
+                                      Colors.red);
+                                }
+                                if (passwordC.text.length < 6) {
+                                  return Utils.showSnackBar(
+                                      'Password minimal 6 karakter',
+                                      Colors.red);
+                                }
+                                AuthService().login(emailC.text.trim(),
+                                    passwordC.text.trim(), context);
+                              } else {
+                                Utils.showSnackBar(
+                                    'Email harus terdapat ${'@'}', Colors.red);
+                              }
                             },
                             child: const Text(
                               'Login',
@@ -155,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 builder: (_) =>
                                                     const RegisterPage()),
                                             (route) => false),
-                                  text: 'Daftar',
+                                  text: 'Register',
                                   style: const TextStyle(color: Colors.blue)),
                             ],
                           ))

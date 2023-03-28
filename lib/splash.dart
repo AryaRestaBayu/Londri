@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:londri/auth/login_page.dart';
 import 'package:londri/main.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({Key? key}) : super(key: key);
+  const Splash({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Splash> createState() => _SplashState();
@@ -18,7 +21,7 @@ class _SplashState extends State<Splash> {
         const Duration(seconds: 3),
         () => Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => const RoleTree()),
+            MaterialPageRoute(builder: (context) => LoginPage()),
             (route) => false));
   }
 

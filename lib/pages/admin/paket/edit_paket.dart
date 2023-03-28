@@ -107,6 +107,7 @@ class _EditPaketState extends State<EditPaket> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Paket'),
+        backgroundColor: Color(0xFF67bde1),
       ),
       body: Center(
         child: SizedBox(
@@ -369,6 +370,10 @@ class _EditPaketState extends State<EditPaket> {
                     height: 25,
                   ),
                   ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF67bde1),
+                          shape: ContinuousRectangleBorder(
+                              borderRadius: BorderRadius.circular(30))),
                       onPressed: () {
                         setState(() {
                           namaClientC.text.isEmpty
@@ -401,7 +406,10 @@ class _EditPaketState extends State<EditPaket> {
                         namaClientC.text = '';
                         Navigator.pop(context);
                       },
-                      child: const Text('Edit Paket'))
+                      child: const Text('Edit Paket')),
+                  SizedBox(
+                    height: sizeHeight * 0.03,
+                  )
                 ],
               ),
             ),

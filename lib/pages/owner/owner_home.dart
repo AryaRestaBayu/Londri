@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:londri/auth/login_page.dart';
-import 'package:londri/pages/admin/paket/detail_paket_admin.dart';
 import 'package:londri/pages/admin/paket/tambah_paket.dart';
+import 'package:londri/pages/owner/detail_paket_owner.dart';
+import 'package:londri/pages/user/detail_paket_user.dart';
 import 'package:londri/service/auth_service.dart';
 
 class OwnerHome extends StatefulWidget {
@@ -44,6 +45,7 @@ class _OwnerHomeState extends State<OwnerHome> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Owner Home'),
+        backgroundColor: Color(0xFF67bde1),
         actions: [
           IconButton(
               onPressed: () {
@@ -71,13 +73,6 @@ class _OwnerHomeState extends State<OwnerHome> {
           );
         }),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddPaket()));
-        },
-        child: const Icon(Icons.add),
-      ),
     );
   }
 
@@ -93,7 +88,7 @@ class _OwnerHomeState extends State<OwnerHome> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => DetailPaketAdmin(
+                      builder: (context) => DetailPaketOwner(
                             thisPaket['id'],
                           )));
             },
@@ -142,21 +137,31 @@ class _OwnerHomeState extends State<OwnerHome> {
                                         top: sizeHeight * 0.010,
                                         left: sizeWidth * 0.03,
                                         right: sizeWidth * 0.02),
-                                    child: Text(
-                                      thisPaket['list_status'],
-                                      style: TextStyle(
-                                        color: thisPaket['list_status'] ==
-                                                'Proses'
-                                            ? Colors.yellow
-                                            : thisPaket['list_status'] ==
-                                                    'Selesai'
-                                                ? Colors.green
-                                                : thisPaket['list_status'] ==
-                                                        'Diambil'
-                                                    ? Colors.blue
-                                                    : Colors.red,
-                                        fontSize: sizeWidth * 0.043,
-                                        fontWeight: FontWeight.bold,
+                                    child: Container(
+                                      width: sizeWidth * 0.18,
+                                      height: sizeHeight * 0.025,
+                                      decoration: BoxDecoration(
+                                          color: thisPaket['list_status'] ==
+                                                  'Proses'
+                                              ? Colors.yellow
+                                              : thisPaket['list_status'] ==
+                                                      'Selesai'
+                                                  ? Colors.green
+                                                  : thisPaket['list_status'] ==
+                                                          'Diambil'
+                                                      ? Colors.blue
+                                                      : Colors.red,
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
+                                      child: Center(
+                                        child: Text(
+                                          thisPaket['list_status'],
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: sizeWidth * 0.035,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -199,19 +204,23 @@ class _OwnerHomeState extends State<OwnerHome> {
                                   )
                                 ],
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: sizeHeight * 0.007,
-                                    right: sizeWidth * 0.03,
-                                    bottom: sizeHeight * 0.008),
-                                child: Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: Text(
-                                    'Total Harga: Rp.' +
-                                        thisPaket['list_harga'],
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  width: sizeWidth * 0.48,
+                                  height: sizeHeight * 0.025,
+                                  margin: EdgeInsets.only(bottom: 5),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFdef0f2),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Total harga Rp.${thisPaket['list_harga']}',
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ),
                               ),

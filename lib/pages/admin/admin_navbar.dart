@@ -25,12 +25,13 @@ class _AdminNavbarState extends State<AdminNavbar> {
     return Scaffold(
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Color(0xFF67bde1),
           currentIndex: selectedIndex,
           onTap: selectPage,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: ''),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
           ]),
     );
   }

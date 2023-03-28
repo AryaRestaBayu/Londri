@@ -33,6 +33,7 @@ class _UserHomeState extends State<UserHome> {
               'list_tanggal': e['tanggal'],
               'list_harga': e['harga'],
               'list_outlet': e['outlet'],
+              'list_poto': e['poto'],
             })
         .toList();
 
@@ -47,7 +48,8 @@ class _UserHomeState extends State<UserHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Home'),
+        backgroundColor: Color(0xFF67bde1),
+        title: const Text('Paket Saya'),
         actions: [
           IconButton(
               onPressed: () {
@@ -141,21 +143,31 @@ class _UserHomeState extends State<UserHome> {
                                         top: sizeHeight * 0.010,
                                         left: sizeWidth * 0.03,
                                         right: sizeWidth * 0.02),
-                                    child: Text(
-                                      thisPaket['list_status'],
-                                      style: TextStyle(
-                                        color: thisPaket['list_status'] ==
-                                                'proses'
-                                            ? Colors.yellow
-                                            : thisPaket['list_status'] ==
-                                                    'selesai'
-                                                ? Colors.green
-                                                : thisPaket['list_status'] ==
-                                                        'diambil'
-                                                    ? Colors.blue
-                                                    : Colors.red,
-                                        fontSize: sizeWidth * 0.043,
-                                        fontWeight: FontWeight.bold,
+                                    child: Container(
+                                      width: sizeWidth * 0.18,
+                                      height: sizeHeight * 0.025,
+                                      decoration: BoxDecoration(
+                                          color: thisPaket['list_status'] ==
+                                                  'Proses'
+                                              ? Colors.yellow[600]
+                                              : thisPaket['list_status'] ==
+                                                      'Selesai'
+                                                  ? Colors.green
+                                                  : thisPaket['list_status'] ==
+                                                          'Diambil'
+                                                      ? Colors.blue
+                                                      : Colors.red,
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
+                                      child: Center(
+                                        child: Text(
+                                          thisPaket['list_status'],
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: sizeWidth * 0.035,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -170,6 +182,11 @@ class _UserHomeState extends State<UserHome> {
                                     width: sizeWidth * 0.30,
                                     decoration:
                                         BoxDecoration(border: Border.all()),
+                                    child: Image(
+                                      image:
+                                          NetworkImage(thisPaket['list_poto']),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                   SizedBox(
                                     width: sizeWidth * 0.08,
@@ -193,18 +210,23 @@ class _UserHomeState extends State<UserHome> {
                                   )
                                 ],
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: sizeHeight * 0.007,
-                                    right: sizeWidth * 0.03,
-                                    bottom: sizeHeight * 0.008),
-                                child: Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: Text(
-                                    'Total Harga: ${thisPaket['list_harga']}',
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  width: sizeWidth * 0.48,
+                                  height: sizeHeight * 0.025,
+                                  margin: EdgeInsets.only(bottom: 5),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFdef0f2),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Total harga Rp.${thisPaket['list_harga']}',
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ),
                               ),

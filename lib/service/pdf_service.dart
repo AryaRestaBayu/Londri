@@ -33,12 +33,25 @@ class PdfPreviewPage extends StatelessWidget {
                 pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
-                      pw.Header(text: "About Cat", level: 1),
+                      pw.Column(
+                        children: [
+                          pw.Text(
+                            'Detail Paket',
+                            style: pw.TextStyle(fontSize: 30),
+                          ),
+                          pw.Text(DateTime.now().toString())
+                        ],
+                      ),
                       pw.Image(pw.MemoryImage(byteList),
                           fit: pw.BoxFit.fitHeight, height: 100, width: 100)
                     ]),
                 pw.Divider(borderStyle: pw.BorderStyle.dashed),
-                pw.Paragraph(text: "text"),
+                pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceAround,
+                    children: [
+                      pw.Column(),
+                      pw.Column(),
+                    ])
               ]);
         }));
     return pdf.save();

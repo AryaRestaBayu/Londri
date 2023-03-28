@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:londri/auth/login_page.dart' as Login;
+import 'package:londri/auth/register_page.dart' as register;
 import 'package:londri/pages/admin/admin_navbar.dart';
+import 'package:londri/pages/kasir/kasir_home.dart';
+import 'package:londri/pages/owner/owner_home.dart';
 import 'package:londri/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../pages/user/user_home.dart';
 
 class AuthService {
-  Future<void> Register(String email, String password) async {
+  Future<void> Register(
+      BuildContext context, String email, String password) async {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -18,7 +23,11 @@ class AuthService {
                 'email': email,
                 'role': 'user',
               }));
-    } on FirebaseException catch (_) {}
+      route(context);
+    } on FirebaseException catch (_) {
+      Utils.showSnackBar(
+          'Email tidak valid atau email telah terdaftar', Colors.red);
+    }
   }
 
   route(BuildContext context) {
@@ -34,12 +43,25 @@ class AuthService {
               context,
               MaterialPageRoute(builder: (_) => const UserHome()),
               (route) => false);
+        } else if (documentSnapshot.get('role') == "kasir") {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => const KasirHome()),
+              (route) => false);
+        } else if (documentSnapshot.get('role') == "owner") {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => const OwnerHome()),
+              (route) => false);
         } else {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (_) => const AdminNavbar()),
               (route) => false);
         }
+        register.emailC.text = '';
+        register.passwordC.text = '';
+        register.confirmPasswordC.text = '';
       } else {
         print('Document does not exist on the database');
       }
@@ -63,14 +85,16 @@ class AuthService {
       SharedPreferences pref = await SharedPreferences.getInstance();
       pref.setString("email", email);
       pref.setString('role', role);
-    } on FirebaseAuthException catch (_) {
-      // if (e.code == 'user-not-found') {
-      //   Utils.showSnackBar('Akun tidak terdaftar', Colors.red);
-      // } else if (e.code == 'wrong-password') {
-      //   Utils.showSnackBar('Password salah', Colors.red);
-      // }
-      Utils.showSnackBar(
-          'Email tidak terdaftar atau password salah', Colors.red);
+      Login.emailC.text = '';
+      Login.passwordC.text = '';
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        Utils.showSnackBar('Email tidak terdaftar', Colors.red);
+      } else if (e.code == 'wrong-password') {
+        Utils.showSnackBar('Password salah', Colors.red);
+      } else {
+        Utils.showSnackBar('Email tidak valid', Colors.red);
+      }
     }
   }
 
