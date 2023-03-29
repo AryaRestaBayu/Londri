@@ -1,6 +1,8 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:londri/auth/register_page.dart';
+import 'package:londri/auth/register_page_admin.dart';
 import 'package:londri/utils.dart';
 
 class ListUser extends StatefulWidget {
@@ -55,6 +57,14 @@ class _ListUserState extends State<ListUser> {
             child: CircularProgressIndicator(),
           );
         }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => RegisterPageAdmin()));
+        },
+        child: Icon(Icons.person_add_alt),
+        backgroundColor: Color(0xFF67bde1),
       ),
     );
   }

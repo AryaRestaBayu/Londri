@@ -6,6 +6,8 @@ import 'package:londri/pages/admin/paket/tambah_paket.dart';
 import 'package:londri/pages/user/detail_paket_user.dart';
 import 'package:londri/service/auth_service.dart';
 
+import 'detail_paket_kasir.dart';
+
 class KasirHome extends StatefulWidget {
   const KasirHome({super.key});
 
@@ -95,7 +97,7 @@ class _KasirHomeState extends State<KasirHome> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => DetailPaketUser(
+                      builder: (context) => DetailPaketKasir(
                             thisPaket['id'],
                           )));
             },

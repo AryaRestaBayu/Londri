@@ -113,10 +113,8 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Utils.showSnackBar('Email tidak terdaftar', Colors.red);
-      } else if (e.code == 'wrong-password') {
-        Utils.showSnackBar('Password salah', Colors.red);
       } else {
-        Utils.showSnackBar('Email tidak valid', Colors.red);
+        Utils.showSnackBar('Email tidak valid atau password salah', Colors.red);
       }
     }
     Navigator.pop(context);
