@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:londri/utils.dart';
 
 class ListOutlet extends StatefulWidget {
   const ListOutlet({super.key});
@@ -175,8 +176,12 @@ class _ListOutletState extends State<ListOutlet> {
                                             onPressed: () {
                                               editOutlet(editC.text,
                                                   thisOutlet['list_outlet']);
-                                              editC.text = '';
+
                                               Navigator.pop(context);
+                                              Utils.showSnackBar(
+                                                  '${thisOutlet['list_outlet']} diubah menjadi ${editC.text}',
+                                                  Colors.blue);
+                                              editC.text = '';
                                             },
                                             child: const Text('Ubah',
                                                 style: TextStyle(
@@ -206,6 +211,9 @@ class _ListOutletState extends State<ListOutlet> {
                                             onPressed: () {
                                               delete(thisOutlet['list_outlet']);
                                               Navigator.pop(context);
+                                              Utils.showSnackBar(
+                                                  '${thisOutlet['list_outlet']} telah dihapus',
+                                                  Colors.red);
                                             },
                                             child: const Text('Hapus',
                                                 style: TextStyle(
@@ -241,5 +249,6 @@ class _ListOutletState extends State<ListOutlet> {
     await FirebaseFirestore.instance.collection('outlet').doc(outlet).set({
       'nama_outlet': outlet,
     });
+    Utils.showSnackBar('$outlet telah ditambahkan', Colors.blue);
   }
 }

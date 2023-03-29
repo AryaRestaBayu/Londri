@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:londri/utils.dart';
 
 class ListUser extends StatefulWidget {
   const ListUser({super.key});
@@ -263,9 +264,11 @@ class _ListUserState extends State<ListUser> {
     await FirebaseFirestore.instance.collection('users').doc(email).update({
       'role': role,
     });
+    Utils.showSnackBar('Role $email berubah menjadi $role', Colors.blue);
   }
 
   Future delete(String email) async {
     await FirebaseFirestore.instance.collection('users').doc(email).delete();
+    Utils.showSnackBar('Email $email telah dihapus permanen', Colors.red);
   }
 }

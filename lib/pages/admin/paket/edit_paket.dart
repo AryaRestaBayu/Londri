@@ -405,6 +405,7 @@ class _EditPaketState extends State<EditPaket> {
                         hargaC.text = '';
                         namaClientC.text = '';
                         Navigator.pop(context);
+                        Utils.showSnackBar('Paket telah diedit', Colors.blue);
                       },
                       child: const Text('Edit Paket')),
                   SizedBox(
@@ -423,15 +424,15 @@ class _EditPaketState extends State<EditPaket> {
     await FirebaseFirestore.instance
         .collection('paket')
         .doc(widget.itemId)
-        .set({
+        .update({
       'email': emailC.text.trim(),
       'harga': hargaC.text,
       'berat': beratC.text,
       'nama_client': namaClientC.text,
       'outlet': widget.initialOutlet,
       'status': widget.initialStatus,
-      'tanggal': tanggal,
-      'jam': '$jam WIB',
+      // 'tanggal': tanggal,
+      // 'jam': '$jam WIB',
       'poto': widget.initialPoto,
     });
   }

@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     //form login
                     Container(
-                      height: sizeHeight * 0.52,
+                      height: sizeHeight * 0.45,
                       width: sizeWidth * 0.80,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
@@ -124,17 +124,17 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           //lupa password
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  'Lupa password?',
-                                  style: TextStyle(color: Colors.black),
-                                )),
-                          ),
+                          // Align(
+                          //   alignment: Alignment.bottomRight,
+                          //   child: TextButton(
+                          //       onPressed: () {},
+                          //       child: const Text(
+                          //         'Lupa password?',
+                          //         style: TextStyle(color: Colors.black),
+                          //       )),
+                          // ),
                           SizedBox(
-                            height: sizeHeight * 0.03,
+                            height: sizeHeight * 0.04,
                           ),
                           //button login
                           ElevatedButton(

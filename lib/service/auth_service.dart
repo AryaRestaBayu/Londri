@@ -13,6 +13,15 @@ import '../pages/user/user_home.dart';
 class AuthService {
   Future<void> Register(
       BuildContext context, String email, String password) async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(
+                color: Colors.blue,
+              ),
+            ));
+
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -24,10 +33,12 @@ class AuthService {
                 'role': 'user',
               }));
       route(context);
+      Utils.showSnackBar('Masuk sebagai $email', Colors.blue);
     } on FirebaseException catch (_) {
       Utils.showSnackBar(
           'Email tidak valid atau email telah terdaftar', Colors.red);
     }
+    Navigator.pop(context);
   }
 
   route(BuildContext context) {
@@ -62,6 +73,8 @@ class AuthService {
         register.emailC.text = '';
         register.passwordC.text = '';
         register.confirmPasswordC.text = '';
+        Login.emailC.text = '';
+        Login.passwordC.text = '';
       } else {
         print('Document does not exist on the database');
       }
@@ -70,6 +83,15 @@ class AuthService {
 
   Future login(String email, String password, BuildContext context) async {
     late String role;
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(
+                color: Colors.blue,
+              ),
+            ));
+
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password)
@@ -87,6 +109,7 @@ class AuthService {
       pref.setString('role', role);
       Login.emailC.text = '';
       Login.passwordC.text = '';
+      Utils.showSnackBar("Masuk sebagai $email", Colors.blue);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Utils.showSnackBar('Email tidak terdaftar', Colors.red);
@@ -96,6 +119,7 @@ class AuthService {
         Utils.showSnackBar('Email tidak valid', Colors.red);
       }
     }
+    Navigator.pop(context);
   }
 
   Future logout() async {
@@ -103,5 +127,6 @@ class AuthService {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.remove("email");
     pref.remove('role');
+    Utils.showSnackBar("Berhasil logout", Colors.blue);
   }
 }

@@ -21,6 +21,50 @@ class DetailPaketOwner extends StatefulWidget {
 }
 
 class _DetailPaketOwnerState extends State<DetailPaketOwner> {
+  late String initialNama;
+  late String initialEmail;
+  late String initialBerat;
+  late String initialHarga;
+  late String initialOutlet;
+  late String initialStatus;
+  late String initialPoto;
+  late String initialTanggal;
+  late String initialJam;
+
+  Future getInitial() async {
+    var doc = await FirebaseFirestore.instance
+        .collection('paket')
+        .doc(widget.itemId)
+        .get();
+    var getNama = doc.get('nama_client');
+    var getEmail = doc.get('email');
+    var getBerat = doc.get('berat');
+    var getHarga = doc.get('harga');
+    var getOutlet = doc.get('outlet');
+    var getStatus = doc.get('status');
+    var getPoto = doc.get('poto');
+    var getTanggal = doc.get('tanggal');
+    var getJam = doc.get('jam');
+
+    setState(() {
+      initialNama = getNama;
+      initialEmail = getEmail;
+      initialBerat = getBerat;
+      initialHarga = getHarga;
+      initialOutlet = getOutlet;
+      initialStatus = getStatus;
+      initialPoto = getPoto;
+      initialTanggal = getTanggal;
+      initialJam = getJam;
+    });
+  }
+
+  @override
+  void initState() {
+    getInitial();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double sizeHeight = MediaQuery.of(context).size.height;
@@ -46,7 +90,19 @@ class _DetailPaketOwnerState extends State<DetailPaketOwner> {
           IconButton(
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => PdfPreviewPage()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => PdfPreviewPage(
+                            getPoto: initialPoto,
+                            getBerat: initialBerat,
+                            getEmail: initialEmail,
+                            getHarga: initialHarga,
+                            getNama: initialNama,
+                            getOutlet: initialOutlet,
+                            getStatus: initialStatus,
+                            getTanggal: initialTanggal,
+                            getJam: initialJam,
+                          )));
             },
             icon: const Icon(
               Icons.file_download_outlined,

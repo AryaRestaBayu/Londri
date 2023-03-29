@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:londri/pages/admin/paket/edit_paket.dart';
 import 'package:londri/service/pdf_service.dart';
+import 'package:londri/utils.dart';
 
 class DetailPaketAdmin extends StatefulWidget {
   DetailPaketAdmin(
@@ -28,6 +29,8 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
   late String initialOutlet;
   late String initialStatus;
   late String initialPoto;
+  late String initialTanggal;
+  late String initialJam;
 
   Future getInitial() async {
     var doc = await FirebaseFirestore.instance
@@ -41,6 +44,8 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
     var getOutlet = doc.get('outlet');
     var getStatus = doc.get('status');
     var getPoto = doc.get('poto');
+    var getTanggal = doc.get('tanggal');
+    var getJam = doc.get('jam');
 
     setState(() {
       initialNama = getNama;
@@ -50,6 +55,8 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
       initialOutlet = getOutlet;
       initialStatus = getStatus;
       initialPoto = getPoto;
+      initialTanggal = getTanggal;
+      initialJam = getJam;
     });
   }
 
@@ -88,7 +95,19 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
           IconButton(
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => PdfPreviewPage()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => PdfPreviewPage(
+                            getStatus: initialStatus,
+                            getBerat: initialBerat,
+                            getEmail: initialEmail,
+                            getHarga: initialHarga,
+                            getNama: initialNama,
+                            getOutlet: initialOutlet,
+                            getTanggal: initialTanggal,
+                            getJam: initialJam,
+                            getPoto: initialPoto,
+                          )));
             },
             icon: const Icon(
               Icons.file_download_outlined,
@@ -142,6 +161,8 @@ class _DetailPaketAdminState extends State<DetailPaketAdmin> {
                               widget._reference.delete();
                               Navigator.pop(context);
                               Navigator.pop(context);
+                              Utils.showSnackBar(
+                                  'Paket telah dihapus', Colors.red);
                             },
                             child: const Text('Hapus',
                                 style: TextStyle(color: Colors.red)))
