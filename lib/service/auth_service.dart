@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:londri/auth/login_page.dart' as Login;
 import 'package:londri/auth/register_page.dart' as register;
+import 'package:londri/auth/register_page_admin.dart' as registerAdmin;
 import 'package:londri/pages/admin/admin_navbar.dart';
 import 'package:londri/pages/kasir/kasir_home.dart';
 import 'package:londri/pages/owner/owner_home.dart';
@@ -34,6 +35,39 @@ class AuthService {
               }));
       route(context);
       Utils.showSnackBar('Masuk sebagai $email', Colors.blue);
+    } on FirebaseException catch (_) {
+      Utils.showSnackBar(
+          'Email tidak valid atau email telah terdaftar', Colors.red);
+    }
+    Navigator.pop(context);
+  }
+
+  Future RegisterAdmin(
+      BuildContext context, String email, String password) async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(
+                color: Colors.blue,
+              ),
+            ));
+
+    try {
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(value.user!.email)
+                  .set({
+                'email': email,
+                'role': 'user',
+              }));
+      Navigator.pop(context);
+      Utils.showSnackBar('Email $email telah ditaftarkan', Colors.blue);
+      registerAdmin.emailC.text = '';
+      registerAdmin.passwordC.text = '';
+      registerAdmin.confirmPasswordC.text = '';
     } on FirebaseException catch (_) {
       Utils.showSnackBar(
           'Email tidak valid atau email telah terdaftar', Colors.red);

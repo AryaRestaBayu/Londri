@@ -190,7 +190,7 @@ class _RegisterPageAdminState extends State<RegisterPageAdmin> {
                                 return Utils.showSnackBar(
                                     'Password tidak sama', Colors.red);
                               }
-                              AuthService().Register(context,
+                              AuthService().RegisterAdmin(context,
                                   emailC.text.trim(), passwordC.text.trim());
                             },
                             child: const Text(
