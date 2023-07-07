@@ -20,4 +20,5 @@ Londri is an app for tracking and recording user`s laundry.
 
 ## What i use
 - Firebase auth, storage, and firestore
-- 3rd library from https://pub.dev/
+- Local storage (Shared Preferences)
+- And other libraries from https://pub.dev/
